@@ -21,6 +21,14 @@ public class MainActivity extends ActionBarActivity {
 
     private BLEHandler bluetoothHandler;
     private boolean isConnected;
+    private static final boolean INPUT = false;
+    private static final boolean OUTPUT = true;
+    private static final boolean LOW = false;
+    private static final boolean HIGH = true;
+
+    private boolean digitalVal[];
+    private int analogVal[];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,15 @@ public class MainActivity extends ActionBarActivity {
         {
             Toast.makeText(this, R.string.ble_supported, Toast.LENGTH_SHORT).show();
         }
+
+
+        scanButton = (Button) findViewById(R.id.scanButton);
+        bleDeviceListView = (ListView) findViewById(R.id.bleDeviceListView);
+        listViewAdapter = new BLEDeviceListAdapter(this);
+        digitalVal = new boolean[14];
+        analogVal = new int[14];
+
+        bluetoothHandler = new BLEHandler(this);
 
     }
 
